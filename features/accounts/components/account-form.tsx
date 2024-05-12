@@ -19,7 +19,7 @@ const formSchema = insertAccountsSchema.pick({
   name: true,
 });
 
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.input<typeof formSchema>;
 
 type Props = {
   id?: string;

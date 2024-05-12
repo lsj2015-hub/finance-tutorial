@@ -22,7 +22,7 @@ export const NewAccountSheet = () => {
     name: true,
   });
 
-  type FormValues = z.infer<typeof formSchema>;
+  type FormValues = z.input<typeof formSchema>;
 
   const onSubmit = (values: FormValues) => {
     mutation.mutate(values, {
