@@ -22,6 +22,20 @@
       "when": 1715670495864,
       "tag": "0002_colorful_vindicator",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1715678947054,
+      "tag": "0003_amusing_zombie",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1715679009197,
+      "tag": "0004_worthless_fat_cobra",
+      "breakpoints": true
     }
   ]
 }
