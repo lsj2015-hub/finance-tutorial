@@ -1,6 +1,7 @@
 import { TriangleAlert } from 'lucide-react';
 
 import { useOpenCategory } from '@/features/categories/hooks/use-open-category';
+
 import { useOpenTransaction } from '@/features/transactions/hooks/use-open-transaction';
 
 import { cn } from '@/lib/utils';
@@ -25,11 +26,11 @@ export const CategoryColumn = ({ id, category, categoryId }: Props) => {
 
   return (
     <div
+      onClick={onClick}
       className={cn(
         'flex items-center cursor-pointer hover:underline',
         !category && 'text-rose-500'
       )}
-      onClick={onClick}
     >
       {!category && <TriangleAlert className="mr-2 size-4 shrink-0" />}
       {category || 'Uncategorized'}

@@ -5,13 +5,14 @@ import { format, parse } from 'date-fns';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ImportTable } from './import-table';
 import { convertAmountToMiliunits } from '@/lib/utils';
+
+import { ImportTable } from './import-table';
 
 const dateFormat = 'yyyy-MM-dd HH:mm:ss';
 const outputFormat = 'yyyy-MM-dd';
 
-const requiredOptions = ['amout', 'date', 'payee'];
+const requiredOptions = ['amount', 'date', 'payee'];
 
 interface SelectedColumnsState {
   [key: string]: string | null;
@@ -49,7 +50,6 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
       }
 
       newSelectedColumns[`column_${columnIndex}`] = value;
-
       return newSelectedColumns;
     });
   };
@@ -108,10 +108,10 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">
-            Import transaction
+            Import Transaction
           </CardTitle>
           <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
-            <Button size="sm" onClick={onCancel} className="w-full lg:w-auto">
+            <Button onClick={onCancel} size="sm" className="w-full lg:w-auto">
               Cancel
             </Button>
             <Button
@@ -120,7 +120,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
               onClick={handleContinue}
               className="w-full lg:w-auto"
             >
-              continue ({progress} / {requiredOptions.length})
+              Continue ({progress} / {requiredOptions.length})
             </Button>
           </div>
         </CardHeader>
