@@ -1,7 +1,7 @@
-import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
-import { zValidator } from '@hono/zod-validator';
-import { Hono } from 'hono';
 import { z } from 'zod';
+import { Hono } from 'hono';
+import { zValidator } from '@hono/zod-validator';
+import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
 import { subDays, parse, differenceInDays } from 'date-fns';
 import { and, desc, eq, gte, lt, lte, sql, sum } from 'drizzle-orm';
 
@@ -75,10 +75,11 @@ const app = new Hono().get(
       startDate,
       endDate
     );
+
     const [lastPeriod] = await fetchFinancialData(
       auth.userId,
-      startDate,
-      endDate
+      lastPeriodStart,
+      lastPeriodEnd
     );
 
     const incomeChange = calculatePercentageChange(
@@ -139,7 +140,7 @@ const app = new Hono().get(
             Number
           ),
         expenses:
-          sql`SUM(CASE WHEN ${transactions.amount} < 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
+          sql`SUM(CASE WHEN ${transactions.amount} < 0 THEN ABS(${transactions.amount}) ELSE 0 END)`.mapWith(
             Number
           ),
       })
@@ -161,7 +162,7 @@ const app = new Hono().get(
 
     return c.json({
       data: {
-        remmainingAmount: currentPeriod.remaining,
+        remainingAmount: currentPeriod.remaining,
         remainingChange,
         incomeAmount: currentPeriod.income,
         incomeChange,
