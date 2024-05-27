@@ -13,7 +13,7 @@ import { DataCard, DataCardLoading } from '@/components/data-card';
 export const DataGrid = () => {
   const { data, isLoading } = useGetSummary();
 
-  console.log(data);
+  // console.log(data);
 
   const params = useSearchParams();
   const to = params.get('to') || undefined;
