@@ -1,12 +1,16 @@
 'use client';
 
 import { PlaidConnect } from '@/features/plaid/components/plaid-connect';
+import { useGetConnectedBank } from '@/features/plaid/api/use-get-connected-bank';
+import { PlaidDisconnect } from '@/features/plaid/components/plaid-disconnect';
+
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
 export const SettingsCard = () => {
-  const connectedBank = null;
+  const { data: connectedBank, isLoading: isLoadingConnectedBank } =
+    useGetConnectedBank();
 
   return (
     <Card className="border-none drop-shadow-sm">
@@ -30,7 +34,7 @@ export const SettingsCard = () => {
                 ? 'Bank account connected'
                 : 'No Bank Account connected'}
             </div>
-            <PlaidConnect />
+            {connectedBank ? <PlaidDisconnect /> : <PlaidConnect />}
           </div>
         </div>
       </CardContent>
